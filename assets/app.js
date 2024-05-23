@@ -16,5 +16,6 @@ import 'bootstrap';
 import '@popperjs/core';
 import './styles/app.css';
 import '../templates/common_front/style.css';
+import '../templates/home/style.css';
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
