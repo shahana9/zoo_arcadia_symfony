@@ -1,0 +1,137 @@
+/* Header */
+
+:root {
+  --color-principal: #0eb200;
+}
+
+header {
+  font-family: "raleway", sans-serif;
+  background-color: #0eb200;
+}
+
+.nav-link {
+  color: white !important;
+}
+
+header #logo {
+  margin-bottom: 20px;
+  margin-left: 20px;
+  width: 300px;
+}
+
+header #logo img {
+  width: 75px;
+  height: 70px;
+  margin-top: 15px;
+}
+
+/* menu navigation */
+header nav {
+  color: var(--color-principal);
+}
+
+header nav ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.navbar {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+header nav ul li {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  height: 50px;
+  background-color: var(--color-principal);
+  line-height: 40px;
+  text-align: center;
+}
+
+header nav ul li a:hover {
+  background-color: greenyellow;
+}
+
+.dropdown-menu a:hover {
+  background-color: greenyellow;
+  color: white;
+}
+
+ul .dropdown-menu {
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-item {
+  color: white !important;
+}
+
+@media (min-width: 992px) {
+  .navbar-container {
+    background-color: #0eb200;
+  }
+}
+
+/* Footer */
+
+:root {
+  --color-principal: #0eb200;
+}
+
+footer {
+  background: var(--color-principal);
+  color: #fff;
+  /* Couleur du texte */
+  font-size: 20px;
+  padding: 60px;
+  /* Espacement intérieur */
+  text-align: center;
+  /* Alignement du texte */
+  left: 0;
+  bottom: 0;
+  /* Aligner le footer en bas de la fenêtre du navigateur */
+  width: 100%;
+  /* Largeur pleine */
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+  display: inline-block;
+}
+
+footer ul li {
+  display: inline-block;
+  /* Afficher les éléments de la liste en ligne */
+  margin-right: 20px;
+  /* Espacement entre les éléments de la liste */
+}
+
+footer ul li:last-child {
+  margin-right: 0;
+}
+
+
+/* responsive medium screen*/
+@media screen and (min-width: 150px) and (max-width: 768px) {
+  .container nav ul li {
+    font-size: 15px;
+  }
+}
+
+/* responsive large screen */
+@media screen and (min-width: 769px) and (max-width: 992px) {
+  .container nav ul li {
+    font-size: 18px;
+  }
+}
+
+/* responsive large and plus screen */
+@media screen and (min-width: 993px) {
+  .container nav ul li {
+    font-size: 20px;
+  }
+}
