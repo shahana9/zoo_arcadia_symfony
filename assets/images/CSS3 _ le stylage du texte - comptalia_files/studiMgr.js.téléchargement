@@ -1,0 +1,198 @@
+/* === Opale template manager =============================================== */
+var studiMgr = {
+    fInInput: false,
+
+    /* === Public API =========================================================== */
+    /** init function - must be called at the end of page body */
+    init: function () {
+    
+    	var elts = document.getElementsByTagName("a");
+         for (var i = 0; i < elts.length; i++) {
+             elts[i].addEventListener("touchstart", studiMgr.handleTouch, false);
+         }
+    
+        //Surcharge de scAssmntMgr pour réduite l'espace entre la question et les réponse
+        if ("scAssmntMgr" in window){
+		      scAssmntMgr.setMode = function(pElt, pMode){
+		          if(!pElt) return;
+		          switch(pMode) {
+		          case "collapsed" :
+		              pElt.style.display = "none";
+		              if("scSiLib" in window) scSiLib.fireResizedNode(pElt);
+		              break;
+		          case "invisible" :
+		              pElt.style.display = "none";
+		              pElt.style.visibility = "hidden";
+		              if("scSiLib" in window) scSiLib.fireResizedNode(pElt);
+		              break;
+		          case "enabled" : 
+		              if(pElt.className.indexOf("buttonDisabled")>=0) pElt.className = pElt.className.replace("buttonDisabled", "");
+		              pElt.setAttribute("href", "#");
+		          case "disabled" : 
+		              if(pMode=="disabled") {
+		                  if(pElt.className.indexOf("buttonDisabled")>0) pElt.className = pElt.className+" buttonDisabled";
+		                  pElt.removeAttribute("href");
+		              }
+		          default :
+		              pElt.style.display = "";
+		              pElt.style.visibility = "";
+		              if("scSiLib" in window) scSiLib.fireResizedNode(pElt);
+		          }
+		      }
+        }
+    },
+
+    handleTouch: function (event) {
+        event.stopImmediatePropagation();
+    },
+    /** scCoLib OnLoad  */
+    onLoad: function () {
+    
+        $(document).ready(function () {
+        
+            $('body').on("focusout", "input", function () {
+                studiMgr.fInInput = false;
+            });
+
+            $('body').on("focusin", "input", function () {
+                studiMgr.fInInput = true;
+            });
+
+            $('a.prev').bind('click', function () {
+                window.location.href = $(this).attr('href');
+            });
+
+            $('a.next').bind('click', function () {
+                window.location.href = $(this).attr('href');
+            });
+
+            $('a.start').bind('click', function () {
+                window.location.href = $(this).attr('href');
+            });
+
+            $('body').keyup(function (e) {
+                if (studiMgr.fInInput == false) {
+                    if ((e.keyCode || e.which) == 37) { // left
+                        $('.prev').click();
+                    } else if ((e.keyCode || e.which) == 39) { // right
+                        if ($('.start').length) {
+                            $('.start').click();
+                        } else {
+                            $('.next').click();
+                        }
+                    }
+                }
+            });
+
+        });
+
+        scMediaMgr.xFullScreenToggle = function () {
+            scCoLib.util.log("scMediaMgr.xFullScreenToggle");
+            var vFullscreenElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+            if (vFullscreenElement) {
+                this.fCurrentFullScreenElement = vFullscreenElement;
+            } else if (this.fCurrentFullScreenElement) {
+                this.fCurrentFullScreenElement = null;
+            }
+        };
+
+        $(window).on("orientationchange", function (event) {
+            this.fFullScreen = false;
+            this.innerHTML = '<span>' + tplMgr.fStrings[(this.fFullScreen ? 2 : 0)] + '</span>';
+            this.title = tplMgr.fStrings[(this.fFullScreen ? 3 : 1)];
+            tplMgr.fStore.set("templateZen", this.fFullScreen);
+            tplMgr.switchClass(tplMgr.fRoot, "zen_" + !this.fFullScreen, "zen_" + this.fFullScreen, true);
+            for (var i = 0; i < tplMgr.fZenListeners.length; i++) {
+                try {
+                    tplMgr.fZenListeners[i]();
+                } catch (e) {}
+            }
+            return false;
+        });
+    },
+    
+    showHideMenu: function () {
+    	$('#menu').toggleClass( "hidden" );
+    },
+
+    openPrint: function () {
+        var url = window.location.href;
+        url = url.replace("opale", "opale-pdf");
+        url = url.replace("co/" + url.substr(url.lastIndexOf('/') + 1), "opale.pdf");
+        w = window.open(url, '_blank');
+    },
+    
+	increaseFont: function () {
+		if (localStorage.fontSize == null) {
+			var fontSize = "100";
+		} else {
+			var fontSize = localStorage.fontSize;
+		}			
+    	
+    	fontSize = parseInt(fontSize) + 10;
+        $('body').css("font-size", fontSize + "%");
+        localStorage.fontSize = fontSize;
+        studiMgr.displayFontSize();
+    },
+    
+    decreaseFont: function () {
+    	if (localStorage.fontSize == null) {
+			var fontSize = "100";
+		} else {
+			var fontSize = localStorage.fontSize;
+		}
+		
+    	fontSize = parseInt(fontSize) - 10;
+        $('body').css("font-size", fontSize + "%");
+        localStorage.fontSize = fontSize;
+        studiMgr.displayFontSize();
+    },
+    
+    displayFontSize: function () {
+    	var snackBar = document.getElementById("snackbar");
+    	if (snackBar === null) {
+    		$('body').append('<div id="snackbar">Some text some message..</div>');
+    		snackBar = document.getElementById("snackbar");
+    	}
+    	snackBar.innerHTML = localStorage.fontSize + "%";
+    	
+    	var snackClass = $('#snackbar').attr('class');
+    	if (snackClass == "show") {
+    		clearTimeout(studiMgr.fTimoutFunction);
+    	} else {
+    		snackBar.className = "show";
+    	}
+  		 		
+  		studiMgr.fTimoutFunction = setTimeout(function(){ snackBar.className = snackBar.className.replace("show", ""); }, 1500);
+    },
+    
+    addReadSpeaker: function () {
+        window.rsConf = {
+                params: '//f1-eu.readspeaker.com/script/9749/webReader/webReader.js?pids=wr',
+                general: {
+                    syncContainer: "font",
+                    preserveElements: '.rs_preserve, .jwplayer'
+                },
+                ui: {
+                    displayDownload: false
+                }
+            };
+
+            $('#document').prepend('<div id="readspeaker_button1" class="rs_skip rsbtn rs_preserve"><a rel="nofollow" class="rsbtn_play" accesskey="L" title="Ecoutez le texte avec ReadSpeaker" href="//app-eu.readspeaker.com/cgi-bin/rsent?customerid=9749&lang=fr_fr&readid=content&url=' + window.location.href + '"><span class="rsbtn_left rsimg rspart"><span class="rsbtn_text"><span>Ecoutez</span></span></span><span class="rsbtn_right rsimg rsplay rspart"></span></a></div>');
+
+            $('head').append('<script src="//f1-eu.readspeaker.com/script/9749/webReader/webReader.js?pids=wr" type="text/javascript"></script>');
+
+
+            document.getElementById("readspeaker_button1").addEventListener("click", function () {
+                rspkr.init();
+                $('.rsbtn_toolpanel').css('height', '60px');
+                $('#rsmpl_container.rs_visible').css('z-index','1000');
+                $('#rsmpl_container.rs_visible').css('bottom','60px');
+            }, true);
+    
+    },
+
+    loadSortKey: "AY"
+}
+scOnLoads[scOnLoads.length] = studiMgr;
+

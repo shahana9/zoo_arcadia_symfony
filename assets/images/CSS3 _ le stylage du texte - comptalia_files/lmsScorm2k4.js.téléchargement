@@ -1,0 +1,432 @@
+var API = {
+    LMSInitialize: function (p) {
+        this._LastError = 0;
+        this.xLoadLMS("");
+	    console.log("onload");
+	    window.onload = function() {
+            var finishButton = window.frames[0].document.getElementsByClassName("component_base exit");
+            console.log(finishButton.length);
+            finishButton[0].onclick = function () {
+                console.log("The finish button has been clicked inside of the quiz.");
+               // window.history.back();
+            }
+        }
+        return "true";
+
+    },
+
+    LMSTerminate: function (p) {
+        this.Commit("");
+        return "true";
+    },
+
+    LMSFinish: function (p) {
+    //parent.postMessage("LMSFinish", "https://app.comnicia.com.dev");
+	console.log("Quiz ended"); //NE PAS SUPPRIMER, utilisé par les appMobiles pour fermer les quiz
+	return "true"; 
+    },
+
+    LMSGetValue: function (pKey) {
+        this._LastError = 0;
+        var vFields = pKey.split(".");
+        var vLen = vFields.length;
+        switch (vFields[vLen - 1]) {
+            case "_version":
+                return "1.0";
+            case "_children":
+            {
+                var vSet = this._children[vFields[vLen - 2]];
+                if (vSet) {
+                    return vSet;
+                }
+                this._LastError = 301;
+                return "";
+            }
+            case "_count":
+            {
+                --vLen;
+                var vCur = this._Fields;
+                for (var i = 0; i < vLen; i++) {
+                    var vF = vCur[vFields[i]];
+                    if (vF == null) {
+                        return 0;
+                    }
+                    vCur = vF;
+                }
+                var i = 0;
+                for (var vKey in vCur) {
+                    i++;
+                }
+                return i;
+            }
+            default:
+                return "";
+        }
+        var vCur = this._Fields;
+        for (var i = 0; i < vLen; i++) {
+            var vF = vCur[vFields[i]];
+            if (vF == null) {
+                return null;
+            }
+            vCur = vF;
+        }
+        return vCur;
+    },
+
+    LMSSetValue: function (pKey, pValue) {
+        this._LastError = 0;
+        var vFields = pKey.split(".");
+        var vCur = this._Fields;
+        var imax = vFields.length - 1;
+        for (var i = 0; i < imax; i++) {
+            var vF = vCur[vFields[i]];
+            if (vF == null) {
+                vCur = vCur[vFields[i]] = {};
+            } else {
+                vCur = vF;
+            }
+        }
+        if (!(vFields[imax] in vCur) || vCur[vFields[imax]] != pValue) {
+            vCur[vFields[imax]] = pValue;
+            this._Modif = true;
+        }
+        return "true";
+    },
+
+    LMSCommit: function (p) {
+        try {
+            this._LastError = 0;
+            if (this._Modif) {
+		//console.log(this._Fields);
+                  console.log('token : '+token);
+                //return this.xSaveLMS(this.xSerializeLMS(this._Fields), "1.2");
+		return this.xSaveLMS(JSON.stringify(this._Fields), "1.2");
+            }
+            return "true";
+        } catch (e) {
+            this._LastError = 391;
+            return "false";
+        }
+    },
+
+    LMSGetLastError: function () {
+        return this._LastError;
+    },
+
+    LMSGetErrorString: function (pKeyError) {
+        if (!pKeyError) {
+            return "";
+        }
+        switch (pKeyError) {
+            case 0:
+                return "";
+            case 301:
+                return "The data model element does not have children.";
+            case 391:
+                return "Enregistrement des donnees impossible. Veuillez contacter votre administrateur."; //General Commit Failure
+            case 1001:
+                return "Aucune session declaree. Veuillez contacter votre administrateur.";
+            case 1002:
+                return "L'espace de stockage des production est complet. Veuillez choisir un autre lieu de stockage.";
+            case 1004:
+                return "Vous ne disposez pas des droits suffisants pour enregistrer des donnees. Veuillez choisir un autre lieu de stockage.";
+        }
+        return "";
+    },
+
+    LMSGetDiagnostic: function () {
+        return this.GetErrorString(this._LastError);
+    },
+
+    //########## interne ##########
+    _LastError: 0,
+    _Fields: {},
+    _Modif: false,
+    _Session: null,
+    _children: {
+        "comments_from_learner": "comment,location,timestamp",
+        "comments_from_lms": "comment,location,timestamp",
+        "interactions": "id,type,objectives,timestamp,correct_responses,weighting,learner_response,result,latency,description",
+        "learner_preference": "audio_level,language,delivery_speed,audio_captioning",
+        "objectives": "id,score,success_status,completion_status,description",
+        "score": "scaled,raw,min,max"
+    },
+    /* Serialize un objet comportant des donnees au format JS */
+    /*xSerialize : function(pObj){
+     var vBuf="";
+     for (var vKey in pObj){
+     if(vBuf!="") vBuf+=",";
+     var vObj = pObj[vKey];
+     if(vObj instanceof Object){
+     vBuf+="'"+vKey+"':{"+this.xSerialize(vObj)+"}";
+     } else {
+     var vVal = escape(vObj);
+     if(vVal==vObj) {
+     vBuf+="'"+vKey+"':'"+vVal+"'";
+     } else {
+     vBuf+="'"+vKey+"':unescape('"+vVal+"')";
+     }
+     }
+     }
+     return vBuf;
+     },*/
+    xSerializeLMS: function (pObj) {
+        var vBuf = "";
+        for (var vKey in pObj) {
+            if (vBuf != "") {
+                vBuf += ",";
+            }
+            var vObj = pObj[vKey];
+            if (vObj instanceof Object) {
+                vBuf += "@'" + vKey + "':{" + this.xSerializeLMS(vObj) + "}";
+            } else {
+                var vVal = escape(vObj);
+                if (vVal == vObj) {
+                    vBuf += "'" + vKey + "':'" + vVal + "'";
+                } else {
+                    vBuf += "'" + vKey + "':unescape('" + vVal + "')";
+                }
+            }
+        }
+        return vBuf;
+    },
+    /* methode appelee par le contexte de l'application pour initialiser les donnees. */
+    xLoadLMS: function (pString) {
+        try {
+            eval("this._Fields={" + pString + "};");
+        } catch (e) {
+            this._LastError = 1001;
+            throw e;
+        }
+    },
+
+    /* methode appelee par l' API Scorm pour enregistrer les donnees dans le contexte. */
+    xSaveLMS: function (pString, SCORMType) {
+	        
+	try 
+	{
+	    $.ajax({
+		type: "POST",
+		dataType:'json',	
+		contentType:'application/json',
+                url: save_url+"?st=" + SCORMType + '&roid=' + roid + '&rvid=' + rvid,
+		headers:{ 'Authorization':'Bearer ' + token },
+                // beforeSend: function (xhr) {xhr.setRequestHeader('Authorization', 'bearer ' + token);},
+		data: pString
+	    }).done(function (data) {
+	        console.log(data);
+	    });
+            return "true";
+        } catch (e) {
+            this._LastError = 1001;
+        }
+        return "false";
+    }
+};
+
+
+var API_1484_11 = {
+    Initialize: function (p) {
+        this._LastError = 0;
+        this.xLoad("");
+        return "true";
+    },
+
+    Terminate: function (p) {
+        this.Commit("");
+        return "true";
+    },
+
+    GetValue: function (pKey) {
+        this._LastError = 0;
+        var vFields = pKey.split(".");
+        var vLen = vFields.length;
+        switch (vFields[vLen - 1]) {
+            case "_version":
+                return "1.0";
+            case "_children":
+            {
+                var vSet = this._children[vFields[vLen - 2]];
+                if (vSet) {
+                    return vSet;
+                }
+                this._LastError = 301;
+                return "";
+            }
+            case "_count":
+            {
+                --vLen;
+                var vCur = this._Fields;
+                for (var i = 0; i < vLen; i++) {
+                    var vF = vCur[vFields[i]];
+                    if (vF == null) {
+                        return 0;
+                    }
+                    vCur = vF;
+                }
+                var i = 0;
+                for (var vKey in vCur) {
+                    i++;
+                }
+                return i;
+            }
+            default:
+                return "";
+        }
+        var vCur = this._Fields;
+        for (var i = 0; i < vLen; i++) {
+            var vF = vCur[vFields[i]];
+            if (vF == null) {
+                return null;
+            }
+            vCur = vF;
+        }
+        return vCur;
+    },
+
+    SetValue: function (pKey, pValue) {
+        this._LastError = 0;
+        var vFields = pKey.split(".");
+        var vCur = this._Fields;
+        var imax = vFields.length - 1;
+        for (var i = 0; i < imax; i++) {
+            var vF = vCur[vFields[i]];
+            if (vF == null) {
+                vCur = vCur[vFields[i]] = {};
+            } else {
+                vCur = vF;
+            }
+        }
+        if (!(vFields[imax] in vCur) || vCur[vFields[imax]] != pValue) {
+            vCur[vFields[imax]] = pValue;
+            this._Modif = true;
+        }
+        return "true";
+    },
+
+    Commit: function (p) {
+        try {
+            this._LastError = 0;
+            if (this._Modif) {
+                return this.xSave(this.xSerialize(this._Fields), "2004");
+            }
+            return "true";
+        } catch (e) {
+            this._LastError = 391;
+            return "false";
+        }
+    },
+
+    GetLastError: function () {
+        return this._LastError;
+    },
+
+    GetErrorString: function (pKeyError) {
+        if (!pKeyError) {
+            return "";
+        }
+        switch (pKeyError) {
+            case 0:
+                return "";
+            case 301:
+                return "The data model element does not have children.";
+            case 391:
+                return "Enregistrement des donnees impossible. Veuillez contacter votre administrateur."; //General Commit Failure
+            case 1001:
+                return "Aucune session declaree. Veuillez contacter votre administrateur.";
+            case 1002:
+                return "L'espace de stockage des production est complet. Veuillez choisir un autre lieu de stockage.";
+            case 1004:
+                return "Vous ne disposez pas des droits suffisants pour enregistrer des donnees. Veuillez choisir un autre lieu de stockage.";
+        }
+        return "";
+    },
+
+    GetDiagnostic: function () {
+        return this.GetErrorString(this._LastError);
+    },
+
+    //########## interne ##########
+    _LastError: 0,
+    _Fields: {},
+    _Modif: false,
+    _Session: null,
+    _children: {
+        "comments_from_learner": "comment,location,timestamp",
+        "comments_from_lms": "comment,location,timestamp",
+        "interactions": "id,type,objectives,timestamp,correct_responses,weighting,learner_response,result,latency,description",
+        "learner_preference": "audio_level,language,delivery_speed,audio_captioning",
+        "objectives": "id,score,success_status,completion_status,description",
+        "score": "scaled,raw,min,max"
+    },
+    /* Serialize un objet comportant des donnees au format JS */
+    /*xSerialize : function(pObj){
+     var vBuf="";
+     for (var vKey in pObj){
+     if(vBuf!="") vBuf+=",";
+     var vObj = pObj[vKey];
+     if(vObj instanceof Object){
+     vBuf+="'"+vKey+"':{"+this.xSerialize(vObj)+"}";
+     } else {
+     var vVal = escape(vObj);
+     if(vVal==vObj) {
+     vBuf+="'"+vKey+"':'"+vVal+"'";
+     } else {
+     vBuf+="'"+vKey+"':unescape('"+vVal+"')";
+     }
+     }
+     }
+     return vBuf;
+     },*/
+    xSerialize: function (pObj) {
+        var vBuf = "";
+        for (var vKey in pObj) {
+            if (vBuf != "") {
+                vBuf += ",";
+            }
+            var vObj = pObj[vKey];
+            if (vObj instanceof Object) {
+                vBuf += "@'" + vKey + "':{" + this.xSerialize(vObj) + "}";
+            } else {
+                var vVal = escape(vObj);
+                if (vVal == vObj) {
+                    vBuf += "'" + vKey + "':'" + vVal + "'";
+                } else {
+                    vBuf += "'" + vKey + "':unescape('" + vVal + "')";
+                }
+            }
+        }
+        return vBuf;
+    },
+    /* methode appelee par le contexte de l'application pour initialiser les donnees. */
+    xLoad: function (pString) {
+        try {
+            eval("this._Fields={" + pString + "};");
+        } catch (e) {
+            this._LastError = 1001;
+            throw e;
+        }
+    },
+
+    /* methode appelee par l' API Scorm pour enregistrer les donnees dans le contexte. */
+    xSave: function (pString, SCORMType) {
+        try 
+	{
+	    $.ajax({
+		type: "POST",
+		dataType:'json',
+		contentType:'application/json',
+                url: save_url+"?st=" + SCORMType + '&roid=' + roid + '&rvid=' + rvid,
+		headers:{ 'Authorization':'Bearer ' + token },
+                //beforeSend: function (xhr) {xhr.setRequestHeader('Authorization', 'bearer ' + token);},
+		data: pString
+	    }).done(function (data) {
+	        console.log(data);
+	    });
+            return "true";
+        } catch (e) {
+            this._LastError = 1001;
+        }
+        return "false";
+    }
+};
