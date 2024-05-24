@@ -1,0 +1,215 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="title">
+	<h1>Les Habitats</h1>
+</div>
+
+
+<!-- Accordion -->
+
+<div class="accordion" id="accordionExample">
+	<div class="accordion-item">
+		<h2 class="accordion-header">
+			<button class="accordion-button bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+				
+<img class="image-habitat img-fluid" src="{{ asset('images/jungle.jpg') }}" alt="Jungle">
+				<div class="position-absolute top-50 start-50 translate-middle text-center image-title ">
+					<p>Jungle</p>
+				</div>
+			</button>
+		</h2>
+		<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+			<div class="accordion-body">
+				<ul>
+<li><img class="animal-jungle img-fluid" src="{{ asset('images/gorille.jpg') }}" alt="Gorille"></li>
+
+					<br>
+					<div class="description-animal">
+						<strong>Le Gorille</strong>
+						<br><br>
+						<p>
+							Le gorille est le plus grand primate terrestre, avec un mâle adulte pouvant peser jusqu'à 200 kg. Il a un corps massif, recouvert d'une épaisse fourrure de couleur foncée, qui le protège des conditions climatiques de la forêt équatoriale.<br>
+							C'est un herbivore qui se nourrit principalement de plantes telles que les feuilles, les tiges, les fruits et parfois même de petits insectes.
+							                Son régime alimentaire est varié et dépend de la disponibilité des ressources dans son environnement. Le gorille vit en groupe social appelé "troupe" dirigé par un mâle dominant, appelé "dos argenté". Il est connu pour son intelligence, sa sensibilité et sa complexité sociale. Le gorille communique avec ses pairs à travers des vocalisations, des expressions faciales et des gestes corporels.
+						</p>
+					</div>
+					<br><br>
+<li><img class="animal-jungle img-fluid" src="{{ asset('images/chimpanze.jpg') }}" alt="Chimpanzé"></li>
+
+
+					<div class="description-animal">
+						<br>
+						<strong>Le Chimpanzé</strong>
+						<br><br>
+
+						<p>
+							Découvrez le Chimpanzé
+							                Le chimpanzé est un primate fascinant qui partage de nombreuses caractéristiques et comportements avec les humains. Voici un aperçu de cette créature extraordinaire :
+							                Le chimpanzé est un primate de taille moyenne, avec un mâle adulte pouvant peser jusqu'à 70 kg.<br>
+							Son corps est recouvert de poils noirs ou bruns, et il a des bras longs et des doigts agiles qui lui permettent de se déplacer aisément dans les arbres.
+							                Il est omnivore et se nourrit d'une variété d'aliments, y compris des fruits, des feuilles, des graines, des insectes et même de la viande.<br>
+							Son régime alimentaire varie en fonction de la saison et de la disponibilité des ressources alimentaires dans son habitat.
+							                Le chimpanzé vit en groupe social appelé "communauté", dirigé par un mâle dominant.<br>
+							Il est connu pour son intelligence exceptionnelle, sa capacité à utiliser des outils, sa communication complexe et son comportement social élaboré.
+							                Le chimpanzé habite les forêts tropicales et subtropicales d'Afrique centrale et de l'Ouest. Son habitat est menacé par la déforestation, la fragmentation de l'habitat et le braconnage, ce qui met en danger sa survie à long terme.
+						</p>
+					</div>
+
+
+					<br><br>
+<li><img class="animal-jungle img-fluid" src="{{ asset('images/tigre.jpg') }}" alt="Tigre"></li>
+
+
+					<div class="description-animal">
+						<br>
+						<strong>Le Tigre</strong>
+						<br><br>
+
+						<p>
+							Découvrez le Tigre
+							
+							                Originaire d'Asie, le tigre est l'un des plus grands félins du monde. Reconnaissable par son pelage rayé et sa majesté, le tigre incarne la puissance et la grâce.
+							                Les habitats forestiers de l'Inde, de la Chine, de la Russie et d'autres régions asiatiques abritent encore ces magnifiques prédateurs, bien que leur nombre ait diminué en raison de la perte d'habitat et du braconnage.
+							                Venez rencontrer le tigre au zoo, où nous soutenons les efforts de conservation visant à protéger cette espèce emblématique de la planète.
+						</p>
+					</div>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="accordion-item">
+		<h2 class="accordion-header" id="headingTwo">
+			<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+<img class="image-habitat img-fluid" src="{{ asset('images/marais.jpg') }}" alt="Marais">
+
+				<div class="position-absolute top-50 start-50 translate-middle text-center image-title">
+					<p>Marais</p>
+				</button>
+			</h2>
+			<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+				<div class="accordion-body">
+					<ul>
+<li><img class="animal-jungle img-fluid" src="{{ asset('images/grenouille.jpg') }}" alt="Grenouille"></li>
+
+						<br>
+						<div class="description-animal">
+							<strong>La Grenouille</strong>
+							<br><br>
+							<p>
+								Découvrez la Grenouille
+								
+								                De la forêt tropicale aux zones humides, la grenouille est une créature fascinante et versatile.<br>
+								Avec sa peau lisse et ses sauts agiles, elle incarne la biodiversité des écosystèmes aquatiques.<br>
+								Des régions tropicales d'Amérique du Sud aux marais d'Europe, les grenouilles peuplent une variété d'habitats.
+								<br>Au zoo, plongez dans le monde des amphibiens et découvrez comment nous contribuons à préserver ces créatures délicates et essentielles à notre écosystème.
+							</p>
+						</div>
+						<br><br>
+<li><img class="animal-jungle img-fluid" src="{{ asset('images/crocodile.jpg') }}" alt="Crocodile"></li>
+
+						<div class="description-animal">
+							<br><br>
+							<strong>Le Crocodile</strong>
+							<br><br>
+
+							<p>
+								Rencontrez notre impressionnant résident des marais : le crocodile du Nil. Avec sa silhouette massive et sa peau écailleuse, le crocodile du Nil est l'un des prédateurs les plus redoutables des eaux africaines.
+								                Venez observer son comportement fascinant alors qu'il se faufile silencieusement dans l'eau, attendant patiemment sa proie. Doté d'une mâchoire puissante et de dents acérées, ce reptile redoutable est un véritable symbole de la force et de la grâce de la nature sauvage.
+							</p>
+						</div>
+						<br>
+<li><img class="animal-jungle img-fluid" src="{{ asset('images/castor.jpg') }}" alt="Castor"></li>
+
+
+						<br>
+						<div class="description-animal">
+							<strong>Le Castor</strong>
+							<br><br>
+							<p>
+								Découvrez le Castor
+								
+								                Habitué des rivières et des lacs, le castor est une créature emblématique des milieux aquatiques.
+								<br>Reconnaissable à sa queue plate et à ses incisives impressionnantes, il incarne l'ingéniosité du règne animal.<br>
+								Des cours d'eau nord-américains aux rivières européennes, le castor façonne son environnement en construisant des barrages et des huttes.<br>
+								Au zoo, explorez le monde fascinant du castor et découvrez comment nous préservons son habitat et sa précieuse contribution à l'équilibre écologique.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="headingThree">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+<img class="image-habitat img-fluid" src="{{ asset('images/savane.jpg') }}" alt="Savane">
+
+						<div class="position-absolute top-50 start-50 translate-middle text-center image-title">
+							<p>Savane</p>
+
+						</button>
+					</h2>
+					<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+						<div class="accordion-body">
+							<br>
+							<ul>
+<li><img class="animal-jungle img-fluid" src="{{ asset('images/lion.jpg') }}" alt="Lion"></li>
+
+
+								<div class="description-animal">
+									<br>
+									<strong>Le Lion</strong>
+									<br><br>
+									<p>
+										Explorez le Monde Fascinant du Lion
+										                Le lion, roi des animaux, est parmi les créatures les plus majestueuses de la savane africaine. Voici quelques faits intéressants :
+										                Le lion est un félin impressionnant, reconnaissable par sa crinière distinctive chez les mâles. Il est parmi les plus grands félins au monde, pesant jusqu'à 250 kg.
+										                C'est un prédateur carnivore, chassant une grande variété de proies. Les lionnes, généralement responsables de la chasse, travaillent en équipe.
+										                Le lion vit en groupe social appelé "fierté", composé de plusieurs femelles, de leurs petits et d'un ou plusieurs mâles.
+										                Il habite les savanes, les prairies et les zones semi-désertiques d'Afrique subsaharienne, menacé par la perte d'habitat, le braconnage et les conflits humains.
+										                Classé comme une espèce vulnérable, des efforts de conservation sont déployés pour protéger ce félin, notamment par la création de réserves naturelles et la lutte contre le commerce illégal des espèces sauvages.
+
+									</p>
+								</div>
+
+								<br>
+<li><img class="animal-jungle img-fluid" src="{{ asset('images/girafe.jpg') }}" alt="Girafe"></li>
+
+								<div class="description-animal">
+									<br>
+									<strong>La Girafe</strong>
+									<br><br>
+									<p>
+										Symbole de grâce et de majesté, la girafe est l'une des créatures les plus emblématiques de la savane africaine.<br>
+										Avec son long cou et ses taches distinctives, elle incarne l'élégance de la faune africaine.
+										<br>
+										Des plaines herbeuses aux forêts clairsemées, la girafe se déplace avec grâce à la recherche de feuillage frais.
+										<br>
+										Au zoo, plongez dans le monde fascinant de la girafe et découvrez comment nous contribuons à protéger cette espèce emblématique et son habitat naturel.
+									</p>
+								</div>
+
+								<br>
+<li><img class="animal-jungle img-fluid" src="{{ asset('images/leopard.jpg') }}" alt="Léopard"></li>
+
+								<div class="description-animal">
+									<br>
+									<strong>Le Léopard</strong>
+									<br><br>
+									<p>
+										Maître des ombres et prédateur agile, le léopard est l'un des félins les plus emblématiques de la savane africaine et des forêts asiatiques.
+										                Reconnaissable à ses taches distinctives et à sa silhouette élancée, il incarne la puissance et la grâce.
+										                Des terres arides aux forêts denses, le léopard se fond habilement dans son environnement, traquant ses proies avec une habileté redoutable.
+										                Au zoo, explorez le monde fascinant du léopard et découvrez comment nous contribuons à protéger cette espèce emblématique et à préserver son habitat naturel.
+
+									</p>
+
+								</div>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+{% endblock %}
