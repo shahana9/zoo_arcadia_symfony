@@ -1,0 +1,137 @@
+.root {
+    --color-principal: #0eb200;
+}
+
+/* Typography */
+span {
+    color: var(--color-principal);
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Body */
+
+body {
+    background-color: white;
+}
+
+/* Body titles */
+h2.sub-title {
+    color: var(--color-principal);
+    font-family: "Raleway", sans-serif;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 15px;
+    margin-top: 15px;
+}
+
+h1.title {
+    color: var(--color-principal);
+    font-family: "Raleway", sans-serif;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.highlights {
+    font-family: "raleway", sans-serif;
+}
+
+
+/* Description habitats */
+.description-restaurant {
+    font-family: "Raleway", sans-serif;
+    text-align: center;
+    line-height: 30px;
+}
+
+.description-visite-habitat {
+    font-family: "Raleway", sans-serif;
+    text-align: center;
+    line-height: 30px;
+}
+
+.description-petit-train {
+    font-family: "Raleway", sans-serif;
+    text-align: center;
+    line-height: 30px;
+}
+
+/* responsive small screen */
+
+@media screen and (max-width: 576px) {
+    h1 .title {
+        font-size: 25px !important;
+    }
+
+    h2.sub-title {
+        font-size: 20px !important;
+    }
+
+    .description-restaurant {
+        font-size: 15px !important;
+    }
+
+    span.highlights {
+        font-size: 14px !important;
+    }
+}
+
+/* responsive medium screen*/
+@media screen and (min-width: 577px) and (max-width: 768px) {
+    .title h1 {
+        font-size: 30px !important;
+    }
+
+    .sub-title h2 {
+        font-size: 25px !important;
+    }
+
+    .description-restaurant {
+        font-size: 18px !important;
+    }
+
+    span.highlights {
+        font-size: 16px !important;
+    }
+}
+
+/* responsive large screen */
+@media screen and (min-width: 769px) and (max-width: 992px) {
+    h1.title {
+        font-size: 30px !important;
+    }
+
+    h2.sub-title {
+        font-size: 25px !important;
+    }
+
+    .description-restaurant {
+        font-size: 20px !important;
+    }
+
+    span.highlights {
+        font-size: 18px !important;
+    }
+}
+
+/* responsive large and plus screen */
+@media screen and (min-width: 993px) {
+    h1.title {
+        font-size: 35px !important;
+    }
+
+    h2.sub-title {
+        font-size: 30px !important;
+    }
+
+    img.service-img {
+        width: 60% !important;
+        height: 60% !important;
+    }
+
+    span.highlights {
+        font-size: 20px;
+    }
+}
