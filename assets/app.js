@@ -20,5 +20,6 @@ import '../templates/home/style.css';
 import '../templates/services/style.css';
 import '../templates/habitats/style.css';
 import '../templates/contact/style.css';
+import '../templates/security/style.css';
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
