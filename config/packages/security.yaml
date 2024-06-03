@@ -17,6 +17,12 @@ security:
             lazy: true
             provider: app_user_provider
             custom_authenticator: App\Security\LoginFormAuthenticator
+            entry_point: App\Security\LoginFormAuthenticator
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                default_target_path: easyadmin
+                always_use_default_target_path: true
             logout:
                 path: app_logout
                 # where to redirect after logout
@@ -41,7 +47,7 @@ security:
     access_control:
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/employee, roles: ROLE_EMPLOYEE }
-         - { path: ^/vet, roles: ROLE_VET }8
+         - { path: ^/vet, roles: ROLE_VET }
 
 when@test:
     security:
