@@ -19,7 +19,10 @@ class UserCrudController extends AbstractCrudController
     {
         return $crud
         ->setEntityLabelInPlural('Utilisateurs')
-        ->setEntityLabelInSingular('Utilisateur');
+        ->setEntityLabelInSingular('Utilisateur')
+        ->setPageTitle('index','Zoo Arcadia - Administration')
+        ->setPaginatorPageSize(10);
+      
     }
 
     
