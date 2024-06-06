@@ -1,3 +1,14 @@
 easy_admin:
     entities:
-        - App\Entity\User
+        User:
+            class: App\Entity\User
+            list:
+                fields: ['id', 'email', 'roles']
+            form:
+                fields: ['email', 'roles', 'password']
+            edit:
+                fields: ['email', 'roles', 'password']
+            show:
+                fields: ['id', 'email', 'roles']
+            new:
+                fields: ['email', 'roles', 'password']
