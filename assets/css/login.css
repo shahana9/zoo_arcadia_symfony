@@ -1,6 +1,6 @@
 :root {
     --color-principal: #0eb200;
-}
+} 
 
 /* Titles */
 
@@ -31,10 +31,10 @@ h1 {
     font-weight: bold;
 }
 
-.btn-center {
+/* .btn-center {
     display: flex;
     justify-content: center;
-}
+} */
 
 /* responsive small screen */
 

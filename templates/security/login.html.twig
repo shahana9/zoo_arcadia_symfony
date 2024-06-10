@@ -27,7 +27,7 @@
 
 
 					<label class="label" for="connexion">{{"Mot de passe"}}</label>
-					<input type="password" name="password" id="inputPassword" class="form-control mt-2" placeholder="Entrez votre mot de passe" autocomplete="current-password" required>
+					<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Entrez votre mot de passe" autocomplete="current-password" required>
 					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 					<div class="checkbox mb-3">
 						<label>
@@ -35,8 +35,11 @@
 							{{"Remember me"}}
 						</label>
 					</div>
-					<button class="btn btn-success mt-3" type="submit">
+					<button class="btn btn-success mt-3 mb-5" type="submit">
 						{{"se connecter"}}
 					</button>
 				</form>
-			{% endblock %}
+			</div>
+		</div>
+
+	{% endblock %}
