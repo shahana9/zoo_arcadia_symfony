@@ -77,7 +77,7 @@ ul .dropdown-menu {
 }
 
 footer {
-  background: var(--color-principal);
+  background: var(--color-principal) !important;
   color: #fff;
   /* Couleur du texte */
   font-size: 20px;
