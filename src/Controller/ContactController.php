@@ -19,22 +19,29 @@ class ContactController extends AbstractController
         $form = $this->createForm(ContactType::class, $contact);
 
         $form->handleRequest($request);
-        if($form->isSubmitted()&& $form->isValid()) {
+        var_dump($form->isSubmitted());
+        if ($form->isSubmitted() && $form->isValid()) {
+            var_dump('2');
             $email = (new Email())
-                ->from($contact->getEmail())
-                ->to('s27ty.test@inbox.testmail.app') 
+                ->to('shahana93@hotmail.com')
+                ->from('no-reply@test.com')
                 ->subject($contact->getTitle())
                 ->text($contact->getDescription());
 
-            $mailer->send($email);
+            try {
+                $mailer->send($email);
+                $this->addFlash('success', 'Votre message a été envoyé avec succès !');
 
-            $this->addFlash('success', 'Votre message a été envoyé avec succès !');
-
-            return $this->redirectToRoute('contact');
+                return $this->redirectToRoute('app_contact');
+            } catch (\Throwable $th) {
+                //throw $th;
+                $this->addFlash('error', $th->getMessage() . " : Votre message n'est pas envoyé!");
+            }           
         }
 
         return $this->render('contact/contact.html.twig', [
             'form' => $form->createView(),
+            'title' => 'Contact'
         ]);
     }
 }

@@ -22,6 +22,14 @@
 			{% include 'common_front/header.html.twig' %}
 		{% endblock %}
 
+		{% for label, messages in app.flashes %}
+			{% for message in messages %}
+				<div class="alert alert-{{ label }}">
+					{{ message }}
+				</div>
+			{% endfor %}
+		{% endfor %}
+
 		{% block body %}{% endblock %}
 
 		{% block footer %}
