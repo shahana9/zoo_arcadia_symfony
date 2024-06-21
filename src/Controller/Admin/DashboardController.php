@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Avis;
 use App\Entity\User;
 use App\Entity\Animal;
@@ -14,10 +15,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-class DashboardController extends AbstractDashboardController
+class DashboardController extends AbstractController
 {
     private AuthorizationCheckerInterface $authChecker;
     private AdminUrlGenerator $adminUrlGenerator;
@@ -31,20 +31,16 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-        if ($this->authChecker->isGranted('ROLE_ADMIN')) {
-            $url = $this->get(AdminUrlGenerator::class)->setController(UserCrudController::class)->generateUrl();
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $url = $this->adminUrlGenerator->setController(UserCrudController::class)->generateUrl();
             return $this->redirect($url);
-        } elseif ($this->authChecker->isGranted('ROLE_VETERINAIRE')) {
-            
+        } elseif ($this->isGranted('ROLE_VETERINAIRE')) {
             return $this->render('veterinarian/dashboard.html.twig');
-        } elseif ($this->authChecker->isGranted('ROLE_EMPLOYE')) {
-            
+        } elseif ($this->isGranted('ROLE_EMPLOYE')) {
             return $this->render('employee/dashboard.html.twig');
         } else {
             throw $this->createAccessDeniedException();
         }
-
-        return $this->render('admin/dashboard.html.twig');
     }
 
     public function configureDashboard(): Dashboard
@@ -63,14 +59,14 @@ class DashboardController extends AbstractDashboardController
         }
 
         if ($this->isGranted('ROLE_VETERINAIRE')) {
-            yield MenuItem::linkToCrud('rapport-vétérinaire', 'fas fa-file-medical', Report::class);
+            yield MenuItem::linkToCrud('Rapports vétérinaires', 'fas fa-file-medical', Report::class);
             yield MenuItem::linkToCrud('Habitats', 'fas fa-leaf', Habitat::class);
         }
 
         if ($this->isGranted('ROLE_EMPLOYE')) {
             yield MenuItem::linkToCrud('Tâches', 'fas fa-comment', Avis::class);
-            yield MenuItem::linkToCrud('Services', 'fas fa-tools', Service::class); 
-            yield MenuItem::linkToCrud('Animal', 'fas fa-tiger', Animal::class);
+            yield MenuItem::linkToCrud('Services', 'fas fa-tools', Service::class);
+            yield MenuItem::linkToCrud('Animaux', 'fas fa-tiger', Animal::class);
         }
     }
 }
