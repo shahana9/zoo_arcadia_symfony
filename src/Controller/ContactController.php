@@ -15,18 +15,19 @@ class ContactController extends AbstractController
     #[Route('/contact', name: 'app_contact')]
     public function newContact(Request $request, MailerInterface $mailer): Response
     {
-        $contact = new Contact("","","");
-        $form = $this->createForm(ContactType::class, $contact);
-
+        $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
-        var_dump($form->isSubmitted());
         if ($form->isSubmitted() && $form->isValid()) {
-            var_dump('2');
+            $data = $form->getData();
+
+            $address = $data['email'];
+            $title = $data['title'];
+            $content = $data['description'];
             $email = (new Email())
-                ->to('shahana93@hotmail.com')
-                ->from('no-reply@test.com')
-                ->subject($contact->getTitle())
-                ->text($contact->getDescription());
+                ->to($address)
+                ->from('no-reply@zooarcadia.com')
+                ->subject($title)
+                ->text($content);
 
             try {
                 $mailer->send($email);
