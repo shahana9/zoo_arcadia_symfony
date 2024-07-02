@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-form">
+	<div class="row">
+		<div class="offset-1 col-11 offset-md-2 col-md-8 offset-lg-3 col-lg-6">
+			<form class="form" id="form-contact">
+				<h1>{{'Formulaire de contact'}}</h1>
+				<br>
+				<label class="label" for="">{{'E-mail'}}</label>
+				<input class="form-control email" type="email" id="id" placeholder="Entrez votre email" maxlength="30 " required/>
+
+				<label class="label" for="contact">{{'Titre'}}</label>
+				<input class="form-control" type="text" placeholder="Entrez votre titre" maxlength="80" required/>
+				<label class="label" for="contact">{{'Description'}}</label>
+				<textarea class="form-control" type="text" cols="40" rows="4" placeholder="Entrez votre description" maxlength="80" required></textarea>
+				<button class="btn btn-success" type="submit">
+					{{'Valider'}}
+				</button>
+			</form>
+		</div>
+	</div>
+</div></div>
+
+{% endblock %}

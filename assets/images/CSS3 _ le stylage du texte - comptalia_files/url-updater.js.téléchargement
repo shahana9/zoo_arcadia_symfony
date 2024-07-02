@@ -1,0 +1,28 @@
+(function () {
+    "use strict";
+    var host = myvar || "https://app.comnicia.com";
+
+    var iframe = document.getElementById('course-iframe');
+
+    function updatePageLocation() {
+        var loc = iframe.contentWindow.location.href;
+
+        var info = {type: "page", content: loc};
+        parent.postMessage(info, host);
+    }
+
+    iframe.contentWindow.onload = updatePageLocation;
+
+    function receiveMessage(event) {
+        if (event.origin !== host) return;
+        
+        if(event.data.type === "getiframepage"){
+            var data = {type:"page", content:iframe.contentWindow.location.href};
+
+            event.source.postMessage(data, event.origin);
+        }
+    }
+    
+    window.addEventListener("message", receiveMessage, false);
+})();
+

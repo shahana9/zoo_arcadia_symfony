@@ -1,0 +1,18 @@
+(function () {
+
+    $(window).on("load", function() {
+        console.log("The quiz is initialzing");
+
+        var scormIFrame = $("#course-iframe").contents();
+
+        var finishButton = scormIFrame.find(".component_base.exit").click(function() {
+    
+            console.log("Finish button has been clicked, sending event to the LMS");
+            
+            parent.postMessage("updateScore", myvar);
+            
+        });
+
+    });
+
+}());
