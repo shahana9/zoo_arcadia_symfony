@@ -69,11 +69,6 @@ ul .dropdown-menu {
   color: white !important;
 }
 
-@media (min-width: 992px) {
-  .navbar-container {
-    background-color: #0eb200;
-  }
-}
 
 /* Footer */
 
@@ -82,7 +77,7 @@ ul .dropdown-menu {
 }
 
 footer {
-  background: var(--color-principal);
+  background: var(--color-principal) !important;
   color: #fff;
   /* Couleur du texte */
   font-size: 20px;
@@ -118,14 +113,14 @@ footer ul li:last-child {
 /* responsive medium screen*/
 @media screen and (min-width: 150px) and (max-width: 768px) {
   .container nav ul li {
-    font-size: 15px;
+    font-size: 25px;
   }
 }
 
 /* responsive large screen */
 @media screen and (min-width: 769px) and (max-width: 992px) {
   .container nav ul li {
-    font-size: 18px;
+    font-size: 25px;
   }
 }
 
@@ -133,5 +128,9 @@ footer ul li:last-child {
 @media screen and (min-width: 993px) {
   .container nav ul li {
     font-size: 20px;
+  }
+
+  .navbar-container {
+    background-color: #0eb200;
   }
 }

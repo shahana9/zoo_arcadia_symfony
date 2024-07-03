@@ -1,4 +1,4 @@
-:root {
+ :root {
     --color-principal: #0eb200;
 }
 
@@ -8,7 +8,7 @@
 }
 
 .welcome h1 {
-    color: var(--color-principal);
+    color: aqua !important;
     font-family: "Raleway", sans-serif;
     font-weight: bold;
     font-size: 40px;
@@ -32,7 +32,7 @@
     width: 200px;
     height: 450px;
     padding: 50px;
-}
+} 
 
 .title-principal-avis h2 {
     color: var(--color-principal);
@@ -99,4 +99,4 @@
     .slide-title-comment {
         justify-content: center;
     }
-}
+} 
