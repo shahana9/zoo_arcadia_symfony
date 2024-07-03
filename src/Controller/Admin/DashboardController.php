@@ -52,21 +52,7 @@ class DashboardController extends AbstractController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-
-        if ($this->isGranted('ROLE_ADMIN')) {
-            yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
-        }
-
-        if ($this->isGranted('ROLE_VETERINAIRE')) {
-            yield MenuItem::linkToCrud('Rapports vétérinaires', 'fas fa-file-medical', Report::class);
-            yield MenuItem::linkToCrud('Habitats', 'fas fa-leaf', Habitat::class);
-        }
-
-        if ($this->isGranted('ROLE_EMPLOYE')) {
-            yield MenuItem::linkToCrud('Tâches', 'fas fa-comment', Avis::class);
-            yield MenuItem::linkToCrud('Services', 'fas fa-tools', Service::class);
-            yield MenuItem::linkToCrud('Animaux', 'fas fa-tiger', Animal::class);
-        }
+        yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-home');
+        yield MenuItem::linkToCrud('Utilisateur', 'fas fa-user', User::class);
     }
 }
