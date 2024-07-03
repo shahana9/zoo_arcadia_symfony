@@ -3,6 +3,7 @@
 .vscode
 ###< vscode ###
 ###> symfony/framework-bundle ###
+.env
 /.env.local
 .env
 /.env.local.php
@@ -11,6 +12,7 @@
 /public/bundles/
 /var/
 /vendor/
+
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###
