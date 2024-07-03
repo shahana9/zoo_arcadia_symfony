@@ -1,18 +1,26 @@
+CREATE TABLE user  (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(180) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    roles JSON NOT NULL,
+
+);
+
+CREATE TABLE service_page  (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255)	 NOT NULL,
+    sub-title VARCHAR(255) NOT NULL,
+    content VARCHAR(255) NOT NULL,
+
+);
+
+
 CREATE TABLE report (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
     animal VARCHAR(255) NOT NULL,
     creatd_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-
-);
-
-CREATE TABLE report (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    content TEXT NOT NULL,
-    animal VARCHAR(255) NOT NULL,
-    created_at DATE CURRENT_TIMESTAMP
 
 );
 
