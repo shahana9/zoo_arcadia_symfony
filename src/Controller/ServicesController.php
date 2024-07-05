@@ -2,15 +2,25 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\ServicePage;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ServicesController extends AbstractController
 {
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
     #[Route('/services', name: 'app_services')]
     public function index(): Response
     {
+
+        $serviceRepository = $this->entityManager->getRepository(ServicePage::class);
         return $this->render('services/services.html.twig', [
             'title' => 'Services',
         ]);

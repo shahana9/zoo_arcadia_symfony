@@ -5,17 +5,14 @@ namespace App\Controller\Admin;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Avis;
 use App\Entity\User;
-use App\Entity\Animal;
-use App\Entity\Report;
-use App\Entity\Habitat;
-use App\Entity\Service; 
-use App\Controller\Admin\UserCrudController;
+use App\Entity\ServicePage;
+use App\Controller\ServicePageCrudController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class DashboardController extends AbstractController
 {
@@ -31,16 +28,9 @@ class DashboardController extends AbstractController
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-        if ($this->isGranted('ROLE_ADMIN')) {
-            $url = $this->adminUrlGenerator->setController(UserCrudController::class)->generateUrl();
-            return $this->redirect($url);
-        } elseif ($this->isGranted('ROLE_VETERINAIRE')) {
-            return $this->render('veterinarian/dashboard.html.twig');
-        } elseif ($this->isGranted('ROLE_EMPLOYE')) {
-            return $this->render('employee/dashboard.html.twig');
-        } else {
-            throw $this->createAccessDeniedException();
-        }
+        
+        return $this->render('admin/dashboard.html.twig');
+       
     }
 
     public function configureDashboard(): Dashboard
@@ -54,5 +44,6 @@ class DashboardController extends AbstractController
     {
         yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-home');
         yield MenuItem::linkToCrud('Utilisateur', 'fas fa-user', User::class);
+        yield MenuItem::linkToCrud('Page de Service', 'fas fa-file-alt', ServicePage::class);
     }
 }
