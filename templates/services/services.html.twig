@@ -2,25 +2,23 @@
 
 {% block body %}
 <div class="container mt-4">
-	<div class="row justify-content-center">
-		<h1 class="title text-center">{{'Les services proposés par le parc'}}</h1>
-		<h2 class="sub-title mt-3">{{'Venez déjeuner dans un environnement dépaysant!'}}</h2>
-		<img src={{ asset('images/restaurant.jpg') }} class="service-img img-fluid d-block w-100 h-100" alt="restaurant">
-		<div class="description-restaurant mt-4">
-			<span class="highlights">{{'Un restaurant pour tous les goûts'}}</span>
-			<p class="mt-3">
-				{{
-                    'Notre restaurant est situé au coeur du zoo. Vous pourrez déguster nos bons petits plats en ayant la compagnie de nos chers animaux.
-                    <b>De la cuisine de notre terroir en passant par la cuisine méditérranée,</b>
-                    nous proposons une offre variée qui répond à toutes vos envies.'
-                }}
-			</p>
-		</div>
-		<h2 class="sub-title mt-3">{{'Uns visite guidée des habitats'}}</h2>
-		<img src={{ asset('images/visite-guidee.jpg') }} class="service-img img-fluid d-block w-100 h-100" alt="visite guidee habitat">
-		<div class="description-visite-habitat mt-4">
-			{{
-                '<p>
+    <div class="row justify-content-center">
+        {% for servicePage in services %}
+            <h1 class="title text-center">{{ service_page.title }}</h1>
+            <h2 class="sub-title mt-3">{{ 'Venez déjeuner dans un environnement dépaysant!' }}</h2>
+            <img src="{{ asset(servicePage.images) }}" class="service-img img-fluid d-block w-100 h-100" alt="{{ servicePage.title }}">
+            <div class="description-restaurant mt-4">
+                <span class="highlights">{{ 'Un restaurant pour tous les goûts' }}</span>
+                <p class="mt-3">
+                    {{ 'Notre restaurant est situé au coeur du zoo. Vous pourrez déguster nos bons petits plats en ayant la compagnie de nos chers animaux.
+                        <b>De la cuisine de notre terroir en passant par la cuisine médite  rranée,</b>
+                        nous proposons une offre variée qui répond à toutes vos envies.' | raw }}
+                </p>
+            </div>
+            <h2 class="sub-title mt-3">{{ 'Une visite guidée des habitats' }}</h2>
+            <img src="{{ asset('images/visite-guidee.jpg') }}" class="service-img img-fluid d-block w-100 h-100" alt="visite guidee habitat">
+            <div class="description-visite-habitat mt-4">
+                {{ '<p>
                     Notre zoo abrite
                     <span class="highlights">une variété incroyable d\'animaux fascinants venus du monde entier.</span>
                     Nous sommes ravis de vous emmener dans une aventure passionnante à la découverte de la diversité de la vie sauvage.
@@ -40,14 +38,12 @@
                 Préparez-vous à rencontrer une multitude d\'animaux étonnants! Nos guides expérimentés vous emmèneront à la rencontre de nos
                 résidents les plus célèbres, des lions majestueux aux pandas ludiques. Profitez de nos activités interactives, notamment 
                 des séances de photos avec les animaux et des ateliers éducatifs pour toute la famille.
-                </p>'
-            }}
-		</div>
-		<h2 class="sub-title mt-3">{{'Visite du zoo en petit train'}}</h2>
-		<img src={{ asset('images/train.png') }} class="service-img d-block w-100 h-100" alt="petit train">
-		<div class="description-petit-train mt-4">
-			{{
-                '<p>
+                </p>' | raw }}
+            </div>
+            <h2 class="sub-title mt-3">{{ 'Visite du zoo en petit train' }}</h2>
+            <img src="{{ asset('images/train.png') }}" class="service-img d-block w-100 h-100" alt="petit train">
+            <div class="description-petit-train mt-4">
+                {{ '<p>
                     <span class="highlights">
                         Bienvenue à bord de notre petit train pour une visite guidée unique au cœur de notre zoo !
                     </span>
@@ -78,9 +74,9 @@
                 
                 <br>
                 Apprenez-en davantage sur leurs comportements, leurs habitudes et leurs habitats naturels. À la fin de la visite, 
-                vous aurez du temps libre pour explorer le zoo à votre rythme mais aussi déjeuner dans notre restaurant.'
-            }}
-        </div>
+                vous aurez du temps libre pour explorer le zoo à votre rythme mais aussi déjeuner dans notre restaurant.' | raw }}
+            </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

@@ -4,9 +4,9 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Entity\ServicePage;
-use App\Controller\ServicePageCrudController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Controller\Admin\ServicePageCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
@@ -14,11 +14,17 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class DashboardController extends AbstractDashboardController
 {
+    private AdminUrlGenerator $adminUrlGenerator;
+    public function __construct(AdminUrlGenerator $adminUrlGenerator)
+    {
+        $this->adminUrlGenerator = $adminUrlGenerator;
+    }
+
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-        
-        return $this->render('admin/dashboard.html.twig');
+        return $this->redirect($this->adminUrlGenerator->setController(ServicePageCrudController::class)->generateUrl());
+        //return $this->render('admin/dashboard.html.twig');
        
     }
 

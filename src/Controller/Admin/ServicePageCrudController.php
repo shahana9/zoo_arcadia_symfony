@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 
 class ServicePageCrudController extends AbstractCrudController
 {
@@ -29,9 +30,13 @@ class ServicePageCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->onlyOnIndex(),
-            TextField::new('title'),
-            TextField::new('sous-titre'),
-            TextareaField::new('content'),
+            TextField::new('Title','Titre'),
+            TextField::new('SubTitle','Sous-titre'),
+            TextareaField::new('Content', 'Contenu'),
+            ImageField::new('images')
+                ->setBasePath('assets/images')
+                ->setUploadDir('assets/images')
+                ->setRequired(false)
         ];
     }
 }

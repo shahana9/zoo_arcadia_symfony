@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ServicesController extends AbstractController
 {
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
@@ -21,8 +21,9 @@ class ServicesController extends AbstractController
     {
 
         $serviceRepository = $this->entityManager->getRepository(ServicePage::class);
+        $services = $serviceRepository->findAll();
         return $this->render('services/services.html.twig', [
-            'title' => 'Services',
+            'services' => $services,
         ]);
     }
 }
