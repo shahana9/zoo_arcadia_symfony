@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\User;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,14 +24,14 @@ class UserType extends AbstractType
                 'Employé' => 'ROLE_STAFF',
 
                 ],
-            'multiple' => true, // Permet une seule sélection
-            'expanded' => false, // Utilise une liste déroulante
+            'multiple' => true, 
+            'expanded' => false, 
             'choice_label' => function ($choice, $key, $value) {
-                // Utilisez cette fonction pour définir le label des options
+                
                 return $key;
             },
             'choice_value' => function ($choice) {
-                // Utilisez cette fonction pour définir la valeur de l'option
+               
                 return $choice;
             },
             ])
@@ -41,7 +41,7 @@ class UserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            
         ]);
     }
 }
