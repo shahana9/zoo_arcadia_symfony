@@ -9,9 +9,9 @@ Bienvenue dans le projet Zoo Arcadia. Il s'agit d'une application web basée sur
 - [Configuration](#configuration)
 - [Base de Données](#base-de-données)
 - [Tests](#tests)
-- [Contribution](#contribution)
-- [Licence](#licence)
-- [Auteurs et Reconnaissance](#auteurs-et-reconnaissance)
+- [Déploiement](#Etapes pour déployer le site web)
+
+
 
 ## Installation
 
