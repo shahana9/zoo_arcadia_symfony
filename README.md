@@ -6,7 +6,6 @@ Bienvenue dans le projet Zoo Arcadia. Il s'agit d'une application web basée sur
 
 - [Installation](#installation)
 - [Utilisation](#utilisation)
-- [Configuration](#configuration)
 - [Base de Données](#base-de-données)
 - [Tests](#tests)
 - [Déploiement](#Etapes pour déployer le site web)
@@ -76,13 +75,6 @@ Une fois le serveur démarré, vous pouvez accéder à l'application à l'adress
 
 Le tableau de bord admin est accessible à l'adresse `/admin`. Il utilise EasyAdminBundle pour gérer des entités comme `User` et `ServicePage`.
 
-## Configuration
-
-Les fichiers de configuration se trouvent dans le répertoire `config`. Ajustez les paramètres si nécessaire pour les services, le routage et d'autres aspects de l'application Symfony.
-
-### Configuration de Sécurité
-
-La configuration de sécurité est gérée dans `config/packages/security.yaml`. Assurez-vous d'avoir les bons paramètres pour les fournisseurs d'utilisateurs, les pare-feu et le contrôle d'accès.
 
 ## Base de Données
 Pour visualiser la base de données, il faut démarrer WAMP server et ouvrir PHPMYADMIN en indiquant "root" comme identifiant et "1993" comme mot de passe.
