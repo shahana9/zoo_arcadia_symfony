@@ -25,7 +25,7 @@ class DashboardController extends AbstractDashboardController
     {
         return $this->redirect($this->adminUrlGenerator->setController(ServicePageCrudController::class)->generateUrl());
         //return $this->render('admin/dashboard.html.twig');
-       
+
     }
 
     public function configureDashboard(): Dashboard
@@ -33,13 +33,15 @@ class DashboardController extends AbstractDashboardController
         return Dashboard::new()
             ->setTitle('Zoo Arcadia - Administration')
             ->renderContentMaximized();
-            
     }
 
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-home');
         yield MenuItem::linkToCrud('Utilisateur', 'fas fa-user', User::class);
-        yield MenuItem::linkToCrud('Page de Service', 'fas fa-file-alt', ServicePage::class);
+
+        if ($this->isGranted('ROLE_EMPLOYEE') || $this->isGranted('ROLE_ADMIN')) {
+            yield MenuItem::linkToCrud('Page de Service', 'fas fa-file-alt', ServicePage::class);
+        }
     }
 }
