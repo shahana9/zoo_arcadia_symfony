@@ -92,52 +92,21 @@ php bin/console doctrine:migrations:migrate
 1-	Préparer l'Environnement de Développement
 S’assurer que Git est installé sur la machine.
 Installer la CLI Heroku en suivant les instructions sur Heroku Dev Center.
-
 2-	Créer un Compte Heroku
 S’inscrire sur Heroku pour obtenir un compte gratuit.
 
-3-	Initialiser un Projet Git
-bash
-Copier le code
-git init
+3-	Créer une Nouvelle Application sur Heroku
+Se connecter à Heroku via la CLI : heroku login
+Créez une nouvelle application dans le site Heroku car si je crée via la ligne de commande, l’application se crée directement en zone ‘US’. Hors, je veux que mon application soit créé en zone « Europe ».
 
-Ajouter et valider vos fichiers :
-bash
-Copier le code
- ```sh
-git add .
-git commit -m "Initial commit"
-'''
-
-4-	Créer une Nouvelle Application sur Heroku
-Se connecter à Heroku via la CLI :
-bash
-Copier le code
- ```sh
-heroku login
-'''
-Créez une nouvelle application Heroku :
-bash
-Copier le code
- ```sh
-heroku create
-'''
+4-	Utiliser JAWSDB comme Base de données pour Heroku
+Heroku addons :create jawsdb
 
 5-	Déployer l'Application
-Poussez votre code vers Heroku :
- ```sh
-bash
-Copier le code
-git push heroku master
-'''
+Poussez votre code vers Heroku : git push heroku master
 
-6-	Configurer l'Application
-Définir les variables d'environnement si nécessaire :
- ```sh
-bash
-Copier le code
-heroku config:set MY_VARIABLE=value
-'''
+
+
 
 
 
