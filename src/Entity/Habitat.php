@@ -21,7 +21,10 @@ class Habitat
 
     #[ORM\Column(length: 255)]
     private ?string $commentaire_habitat = null;
-
+    
+    #[ORM\OneToMany(targetEntity:"App\Entity\Animal", mappedBy:"habitat")]
+    private $animal;
+     
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,18 @@ class Habitat
     public function setCommentaireHabitat(string $commentaire_habitat): static
     {
         $this->commentaire_habitat = $commentaire_habitat;
+
+        return $this;
+    }
+
+    public function getAnimal(): ?Animal
+    {
+        return $this->animal;
+    }
+
+    public function setAnimal(?Animal $animal): self
+    {
+        $this->animal = $animal;
 
         return $this;
     }

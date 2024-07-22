@@ -17,10 +17,13 @@ class Animal
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $etat = null;
+    private ?string $race = null;
+
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\Habitat', inversedBy: 'animals')]
+    private $habitat;
 
     #[ORM\Column(length: 255)]
-    private ?string $race = null;
+    private ?string $etat = null;
 
     public function getId(): ?int
     {
@@ -39,6 +42,31 @@ class Animal
         return $this;
     }
 
+    public function getRace(): ?string
+    {
+        return $this->race;
+    }
+
+    public function setRace(string $race): self
+    {
+        $this->race = $race;
+
+        return $this;
+    }
+
+    public function getHabitat(): ?Habitat
+    {
+        return $this->habitat;
+    }
+
+    public function setHabitat(?Habitat $habitat): self
+    {
+        $this->habitat = $habitat;
+
+        return $this;
+    }
+
+   
     public function getEtat(): ?string
     {
         return $this->etat;
@@ -47,18 +75,6 @@ class Animal
     public function setEtat(string $etat): static
     {
         $this->etat = $etat;
-
-        return $this;
-    }
-
-    public function getRace(): ?string
-    {
-        return $this->race;
-    }
-
-    public function setRace(string $race): static
-    {
-        $this->race = $race;
 
         return $this;
     }
