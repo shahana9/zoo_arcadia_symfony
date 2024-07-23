@@ -5,7 +5,6 @@ namespace App\EventListener;
 use App\Entity\User;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Doctrine\Persistence\Event\LifecycleEventArgs as PersistenceLifecycleEventArgs;
 
 class UserPasswordHasherListener
 {
