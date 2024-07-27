@@ -23,7 +23,7 @@ Encore
      */
     .addEntry('app', './assets/app.js')
 
-       .copyFiles({
+    .copyFiles({
         from: './assets/images',
         to: 'images/[path][name].[ext]'
     })
@@ -76,7 +76,7 @@ Encore
 
     // uncomment to get integrity="..." attributes on your script & link tags
     // requires WebpackEncoreBundle 1.4 or higher
-    //.enableIntegrityHashes(Encore.isProduction())
+    .enableIntegrityHashes(Encore.isProduction())
 
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
