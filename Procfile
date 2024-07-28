@@ -1,1 +1,1 @@
-web: heroku-php-apache2 -C heroku.config.ini public/
+web: heroku-php-apache2 -C public/
