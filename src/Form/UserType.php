@@ -27,11 +27,10 @@ class UserType extends AbstractType
             'multiple' => true, // Permet une seule sélection
             'expanded' => false, // Utilise une liste déroulante
             'choice_label' => function ($choice, $key, $value) {
-                // Utilisez cette fonction pour définir le label des options
                 return $key;
             },
             'choice_value' => function ($choice) {
-                // Utilisez cette fonction pour définir la valeur de l'option
+          
                 return $choice;
             },
             ])
