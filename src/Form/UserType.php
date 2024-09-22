@@ -27,7 +27,6 @@ class UserType extends AbstractType
             'multiple' => true, 
             'expanded' => false, 
             'choice_label' => function ($choice, $key, $value) {
-                
                 return $key;
             },
             'choice_value' => function ($choice) {
