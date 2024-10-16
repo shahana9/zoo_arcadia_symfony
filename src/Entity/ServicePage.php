@@ -25,7 +25,13 @@ private ?string $subTitle2 = null;
 private ?string $subTitle3 = null;
 
 #[ORM\Column(length: 255)]
-private ?string $content = null;
+private ?string $content1 = null;
+
+#[ORM\Column(length: 255)]
+private ?string $content2 = null;
+
+#[ORM\Column(length: 255)]
+private ?string $content3 = null;
 
 #[ORM\Column(length: 255, nullable: true)]
 private ?string $images = null;
@@ -79,14 +85,36 @@ $this->subTitle3 = $subTitle3;
 return $this;
 }
 
-public function getContent(): ?string
+public function getContent1(): ?string
 {
-return $this->content;
+return $this->content1;
 }
 
-public function setContent(string $content): self
+public function setContent1(string $content): self
 {
-$this->content = $content;
+$this->content1 = $content;
+return $this;
+}
+
+public function getContent2(): ?string
+{
+return $this->content2;
+ }
+
+public function setContent2(string $content): self
+{
+$this->content2 = $content;
+return $this;
+}
+
+public function getContent3(): ?string
+{
+return $this->content3;
+}
+
+public function setContent3(string $content): self
+{
+$this->content3 = $content;
 return $this;
 }
 
