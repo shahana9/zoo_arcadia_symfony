@@ -29,7 +29,7 @@ public function createAvis(string $nom, string $contenu)
 public function getValidatedAvis()
 
 {
-         return $this->documentManager->getRepository(Avis::class)->findBy(['statut' => 'valide']);
+         return $this->documentManager->getRepository(Avis::class)->findBy(['actions' => 'validé']);
 }
 
 }

@@ -38,7 +38,8 @@ class HomeController extends AbstractController
         }
 
         // Récupérer les avis validés 
-        $validatedAvis = $this->avisService->getValidatedAvis();
+        $validatedAvis = $documentManager->getRepository(Avis::class)
+        ->findBy(['isValidated' => 'True']);
 
         return $this->render('home/home.html.twig', [
             'title' => 'Accueil',

@@ -112,30 +112,7 @@
                 </div>
             </div>
 
-            {# <div class="container-avis"> 
-                <div class="row">
-                    <div class="offset-1 col-10 offset-md-2 col-md-8 offset-lg-3 col-lg-6">
-                        <div class="title-principal-avis mt-4">
-                            <h2>{{'Votre avis compte!'}}</h2>
-                        </div>
-                        <form class="form" id="form-comment">
-                            <label class="label" for="">{{'Nom'}}</label>
-                            <input class="form-control name" type="text" id="name" placeholder="Entrez votre nom" maxlength="30" required/>
-                            <div class="mt-4">
-                                <label class="label" for="comment">{{'Avis'}}</label>
-                                <textarea class="form-control" id="comment" cols="70" rows="8" placeholder="Entrez votre Avis" maxlength="100" required></textarea>
-                                <div class="valid-feedback"></div>
-                            </div>
-                            <br/>
-                            <button class="btn btn-success mx-auto d-block" type="submit">
-                                {{'Valider'}}
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>#}
-
-
+           
                 <!-- slider comment -->
                     <div class="slide-title-comment mt-5">
 	                    <h2>{{'Ils nous ont rendu visite'}}</h2>
@@ -148,12 +125,12 @@
 					                <div class="container mt-5">
 						                <div class="row">
 							                <div
-								class="col-md-8 offset-md-2">
-								<!-- Cards -->
+								class="col-md-8 offset-md-2 h-100">
+						
 								                <div class="card">
 									            <div class="card-body">
 									        	<h5 class="card-title">{{ avis.nom }}</h5>
-										        <h6 class="card-subtitle mb-2 text-muted">{{ avis.date|date('F j, Y') }}</h6>
+										        <h6 class="card-subtitle mb-2 text-muted">{{ avis.createdAt|date('F j, Y') }}</h6>
 										        <p class="card-text">{{ avis.contenu }}</p>
 									</div>
 								</div>
@@ -174,86 +151,6 @@
 		</button>
 	</div>
 </div>
-
-
-            {# <div class="slide-title-comment mt-5">
-                <h2>{{'Ils nous ont rendu visite'}}</h2>
-            </div>
-            <div class="carousel-container d-flex justify-content-center mx-auto">
-                <div id="carousel-comment" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item carousel-item-comment active">
-                            <div class="container mt-5">
-                                <div class="row">
-                                    <div
-                                        class="col-md-8 offset-md-2">
-                                        <!-- Comment -->
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{'John Doe'}}</h5>
-                                                <h6 class="card-subtitle mb-2 text-muted">{{'January 10, 2024'}}</h6>
-                                                <p class="card-text">
-                                                    {{'Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                    Fusce vel diam ut neque tempor mattis sit amet sit amet nunc.
-                                                    Integer nec odio quis lorem lacinia feugiat at sit amet erat.'}}
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <!-- End Comment -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="carousel-item carousel-item-comment">
-                            <div class="container mt-5">
-                                <div class="row">
-                                    <div class="col-md-8 offset-md-2">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{'Another User'}}</h5>
-                                                <h6 class="card-subtitle mb-2 text-muted">{{'February 15, 2024'}}</h6>
-                                                <p class="card-text">
-                                                    {{'Another comment 1 Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                    elit. Fusce vel diam ut neque tempor mattis sit amet sit amet nunc.
-                                                    Integer nec odio quis lorem lacinia feugiat at sit amet erat.'}}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item carousel-item-comment">
-                            <div class="container mt-5">
-                                <div class="row">
-                                    <div class="col-md-8 offset-md-2">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{'Another User 3'}}</h5>
-                                                <h6 class="card-subtitle mb-2 text-muted">{{'February 22, 2024'}}</h6>
-                                                <p class="card-text">{{'Another comment Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel diam ut neque tempor mattis sit amet sit amet nunc. Integer nec odio quis lorem lacinia feugiat at sit amet erat.'}}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-comment" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">{{'Previous'}}</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carousel-comment" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">{{'Next'}}</span>
-                    </button>
-                </div>
-            </div>
-
-        <br>
-        <br>
-    </div>
-</div>
-<br> #}
+<br><br>
 {% endblock %}
+
