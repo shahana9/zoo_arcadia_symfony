@@ -8,7 +8,11 @@ parameters:
     env(MONGODB_DB): ''
 
 services:
-    # Explicit service configuration for the UserPasswordHasherListener
+    
+    App\Service\AvisService:
+        arguments:
+            $documentManager: '@doctrine_mongodb.odm.document_manager'
+
     App\EventListener\UserPasswordHasherListener:
         arguments:
             $passwordHasher: '@security.password_hasher'

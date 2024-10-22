@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use App\Entity\User;
 use App\Entity\ServicePage;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,6 +9,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -51,6 +51,7 @@ class DashboardController extends AbstractDashboardController
             yield MenuItem::linkToCrud('Page de Service', 'fas fa-file-alt', ServicePage::class);
         }
 
+        yield MenuItem::linkToRoute('Manage Avis', 'fa fa-comment', 'admin_avis_list');
         yield MenuItem::linkToLogout('Se déconnecter', 'fas fa-power-off');
     }
 

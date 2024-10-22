@@ -1,6 +1,7 @@
 <?php
 
-use App\Document\Avis;
+namespace App\Service;
+use  App\Document\Avis;
 use Doctrine\ODM\MongoDB\DocumentManager;
 
 class AvisService
@@ -22,6 +23,13 @@ public function createAvis(string $nom, string $contenu)
 
         $this->documentManager->persist($avis);
         $this->documentManager->flush();
+}
+
+
+public function getValidatedAvis()
+
+{
+         return $this->documentManager->getRepository(Avis::class)->findBy(['statut' => 'valide']);
 }
 
 }
