@@ -5,9 +5,10 @@ namespace App\Controller\Admin;
 use App\Document\Avis;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AvisController extends AbstractController
 {
@@ -44,6 +45,22 @@ class AvisController extends AbstractController
         $url = $this->adminUrlGenerator
         ->setRoute('admin_avis_list')
         ->generateUrl();
+
+        return $this->redirect($url);
+    }
+
+    #[Route('/admin/avis/{id}/delete', name: 'admin_delete_avis')]
+    public function deleteAvis($id): RedirectResponse
+    {
+        $avis = $this->dm->getRepository(Avis::class)->find($id);
+        if ($avis) {
+            $this->dm->remove($avis);
+            $this->dm->flush();
+        }
+
+        $url = $this->adminUrlGenerator
+            ->setRoute('admin_avis_list')
+            ->generateUrl();
 
         return $this->redirect($url);
     }

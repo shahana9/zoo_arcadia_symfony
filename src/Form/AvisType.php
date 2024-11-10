@@ -6,6 +6,7 @@ use App\Document\Avis;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class AvisType extends AbstractType
 {
@@ -13,7 +14,9 @@ class AvisType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('contenu')
+            ->add('contenu', TextareaType::class, [
+                'attr' => ['rows' => 5] 
+            ])
         ;
     }
 
