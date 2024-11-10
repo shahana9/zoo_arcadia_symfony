@@ -1,35 +1,37 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
 {% block content %}
-    <div>
-        <h1>Liste des Avis</h1>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Contenu</th>
-                    <th>Validé</th>
-                    <th>Date de soumission</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                {% for avis in avisList %}
-                    <tr>
-                        <td>{{ avis.nom }}</td>
-                        <td>{{ avis.contenu }}</td>
-                        <td>{{ avis.isValidated ? 'Oui' : 'Non' }}</td>
-                        <td>{{ avis.createdAt|date('Y-m-d H:i') }}</td>
-                        <td>
-                            {% if not avis.isValidated %}
-                                <a href="{{ path('admin_validate_avis', {id: avis.id}) }}" class="btn btn-success">Valider</a>
-                            {% endif %}
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+	<div>
+		<h1>Liste des Avis</h1>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Nom</th>
+					<th>Contenu</th>
+					<th>Validé</th>
+					<th>Date de soumission</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for avis in avisList %}
+					<tr>
+						<td>{{ avis.nom }}</td>
+						<td>{{ avis.contenu }}</td>
+						<td>{{ avis.isValidated ? 'Oui' : 'Non' }}</td>
+						<td>{{ avis.createdAt|date('Y-m-d H:i') }}</td>
+						<td>
+							{% if not avis.isValidated %}
+								<a href="{{ path('admin_validate_avis', {id: avis.id}) }}" class="btn btn-success">Valider</a>
+							{% endif %}
+							<a href="{{ path('admin_delete_avis', {id: avis.id}) }}" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?');">
+								Supprimer
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 {% endblock %}
 
