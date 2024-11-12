@@ -5,8 +5,10 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use App\Entity\Report;
 use App\Entity\ServicePage;
+use App\Controller\Admin\UserCrudController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Controller\Admin\ServicePageCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
@@ -24,8 +26,8 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'app_admin')]
     public function index(): Response
     {
-       //  return $this->redirect($this->adminUrlGenerator->setController(ServicePageCrudController::class)->generateUrl());
-    
+        //  return $this->redirect($this->adminUrlGenerator->setController(ServicePageCrudController::class)->generateUrl());
+
 
         if ($this->isGranted('ROLE_ADMIN')) {
             $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
@@ -34,15 +36,18 @@ class DashboardController extends AbstractDashboardController
         }
 
         if ($this->isGranted('ROLE_VETERINAIRE')) {
-            return $this->render('veterinarian/dashboard.html.twig');
+            $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
+            $url = $adminUrlGenerator->setController(ReportCrudController::class)->generateUrl();
+            return $this->redirect($url);
         }
-        
+
         if ($this->isGranted('ROLE_EMPLOYE')) {
-            return $this->render('employee/dashboard.html.twig');
+            $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
+            $url = $adminUrlGenerator->setController(ServicePageCrudController::class)->generateUrl();
+            return $this->redirect($url);
         }
 
         throw $this->createAccessDeniedException();
-
     }
     public function configureDashboard(): Dashboard
     {
@@ -53,10 +58,12 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-home');
-        yield MenuItem::linkToCrud('Utilisateur', 'fas fa-user', User::class);
+        if ($this->isGranted('ROLE_ADMIN')) {
+            yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-home');
+            yield MenuItem::linkToCrud('Utilisateur', 'fas fa-user', User::class);
+        }
 
-        // Visible uniquement pour les vétérinaires
+        // Visible uniquement pour les vétérinaires et Admin
         if ($this->isGranted('ROLE_VETERINAIRE')) {
             yield MenuItem::linkToCrud('Rapport médicaux', 'fas fa-notes-medical', Report::class);
         }
@@ -64,15 +71,11 @@ class DashboardController extends AbstractDashboardController
         // Visible uniquement pour les employés et les admins
         if ($this->isGranted('ROLE_EMPLOYE') || $this->isGranted('ROLE_ADMIN')) {
             yield MenuItem::linkToCrud('Page de Service', 'fas fa-file-alt', ServicePage::class);
+            yield MenuItem::linkToRoute('Manage Avis', 'fa fa-comment', 'admin_avis_list');
         }
 
-        yield MenuItem::linkToRoute('Manage Avis', 'fa fa-comment', 'admin_avis_list');
         yield MenuItem::linkToLogout('Se déconnecter', 'fas fa-power-off');
 
-        //     // Visible uniquement pour les administrateurs
-        //     if ($this->isGranted('ROLE_ADMIN')) {
-        //         yield MenuItem::linkToCrud('Paramètres Admin', 'fas fa-cogs', AdminSettings::class);
-        // }
+        
     }
-
 }
