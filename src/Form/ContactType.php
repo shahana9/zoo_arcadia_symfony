@@ -24,16 +24,16 @@ class ContactType extends AbstractType
                 'label' => 'E-mail',
                 'constraints' => [
                     new NotBlank(['message' => 'Veuillez entrer votre email']),
-                 new Email(['message' => 'Veuillez entrer une adresse email valide.'])
+                    new Email(['message' => 'Veuillez entrer une adresse email valide.'])
                 ],
-            'attr' => ['placeholder' => 'example@domain.com']
-        ])
+                'attr' => ['placeholder' => 'example@domain.com']
+            ])
 
             ->add('title', TextType::class, [
                 'label' => 'Titre',
                 'constraints' => [
-                new NotBlank(['message' => 'Veuillez entrer un titre.']),
-                new Length(['max' => 255, 'maxMessage' => 'Le titre ne peut pas dépasser 255 caractères.'])
+                    new NotBlank(['message' => 'Veuillez entrer un titre.']),
+                    new Length(['max' => 255, 'maxMessage' => 'Le titre ne peut pas dépasser 255 caractères.'])
                 ],
             ])
             ->add('description', TextareaType::class, [
@@ -44,7 +44,7 @@ class ContactType extends AbstractType
                 ],
                 'attr' => ['placeholder' => 'Votre message']
             ])
-           ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class)
         ;
     }
 

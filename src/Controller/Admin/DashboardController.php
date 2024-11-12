@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use App\Entity\User;
 use App\Entity\Report;
 use App\Entity\ServicePage;
@@ -11,6 +10,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -43,19 +43,7 @@ class DashboardController extends AbstractDashboardController
 
         throw $this->createAccessDeniedException();
 
-        // Option 2. You can make your dashboard redirect to different pages depending on the user
-        //
-        // if ('jane' === $this->getUser()->getUsername()) {
-        //     return $this->redirect('...');
-        // }
-
-        // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
-        // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
-        //
-        // return $this->render('some/path/my-dashboard.html.twig');
     }
-
-
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
@@ -65,8 +53,6 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        // yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-home');
-        // Visible pour tous les rôles (ADMIN, VETERINAIRE, EMPLOYE)
         yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-home');
         yield MenuItem::linkToCrud('Utilisateur', 'fas fa-user', User::class);
 
@@ -80,6 +66,7 @@ class DashboardController extends AbstractDashboardController
             yield MenuItem::linkToCrud('Page de Service', 'fas fa-file-alt', ServicePage::class);
         }
 
+        yield MenuItem::linkToRoute('Manage Avis', 'fa fa-comment', 'admin_avis_list');
         yield MenuItem::linkToLogout('Se déconnecter', 'fas fa-power-off');
 
         //     // Visible uniquement pour les administrateurs
