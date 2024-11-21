@@ -3,14 +3,16 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Report;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
 class ReportCrudController extends AbstractCrudController
 {
@@ -35,9 +37,22 @@ class ReportCrudController extends AbstractCrudController
         return [
             IdField::new('id')->onlyOnIndex(),
             DateTimeField::new('created_at', 'Date de Création')->setFormTypeOptions(['widget' => 'single_text']),
-            TextField::new('nomAnimal', 'Nom de l\'Animal'),
-            TextField::new('race', 'Race'),
-            TextField::new('habitat', 'Habitat'),
+            AssociationField::new('animal'),
+            ChoiceField::new('race')
+                ->setChoices([
+                    'Grand singe' => 'grand singe',
+                    'Mammifère' => 'mammifère',
+                    'Amphibien' => 'amphibien',
+                    'Félidé' => 'félidé',
+                    'Reptile' => 'reptile',
+                    'Giraffidae' => 'giraffidae',
+                ]),
+            ChoiceField::new('habitat')
+            ->setChoices([
+                'Jungle' => 'jungle',
+                'Savane' => 'savane',
+                'Marais' => 'marais',
+            ]),
             TextField::new('detail', 'Détail'),
             TextareaField::new('commentaires', 'Commentaires'),
         ];

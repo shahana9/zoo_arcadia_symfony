@@ -14,7 +14,7 @@ class Animal
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $prenom = null;
+    private ?string $animal = null;
 
     #[ORM\Column(length: 255)]
     private ?string $race = null;
@@ -25,19 +25,29 @@ class Animal
     #[ORM\Column(length: 255)]
     private ?string $etat = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $nourriture = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $grammage = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $date_passage = null;
+
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getPrenom(): ?string
+    public function getAnimal(): ?string
     {
-        return $this->prenom;
+        return $this->animal;
     }
 
-    public function setPrenom(string $prenom): static
+    public function setAnimal(string $animal): static
     {
-        $this->prenom = $prenom;
+        $this->animal = $animal;
 
         return $this;
     }
@@ -77,5 +87,46 @@ class Animal
         $this->etat = $etat;
 
         return $this;
+    }
+
+     public function getNourriture(): ?string
+    {
+        return $this->nourriture;
+    }
+
+    public function setNourriture(string $nourriture): static
+    {
+        $this->nourriture = $nourriture;
+
+        return $this;
+    }
+
+     public function getGrammage(): ?string
+    {
+        return $this->grammage;
+    }
+
+    public function setGrammage(string $grammage): static
+    {
+        $this->grammage = $grammage;
+
+        return $this;
+    }
+
+   public function getDatePassage(): ?\DateTimeImmutable
+    {
+        return $this->date_passage;
+    }
+
+    public function setDatePassage(\DateTimeImmutable $date_passage): self
+    {
+        $this->date_passage = $date_passage;
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+         return $this->animal;
+       
     }
 }

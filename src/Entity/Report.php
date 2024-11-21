@@ -21,8 +21,9 @@ class Report
     #[ORM\Column(length: 255)]
     private ?string $habitat = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $nomAnimal = null;
+    #[ORM\ManyToOne(targetEntity: Animal::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Animal $animal = null;
 
     #[ORM\Column(length: 255)]
     private ?string $race = null;
@@ -67,18 +68,18 @@ class Report
     public function setDetail(string $detail): static
     {
         $this->detail = $detail;
-        
+
         return $this;
     }
-    
-    public function getNomAnimal(): ?string
+
+    public function getAnimal(): ?Animal
     {
-        return $this->nomAnimal;
+        return $this->animal;
     }
 
-    public function setNomAnimal(string $nomAnimal): static
+    public function setAnimal(Animal $animal): static
     {
-        $this->nomAnimal = $nomAnimal;
+        $this->animal = $animal;
 
         return $this;
     }
