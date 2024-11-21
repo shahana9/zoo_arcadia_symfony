@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Report;
+use App\Controller\Admin\AnimalCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -11,9 +12,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
+use EasyCorp\Bundle\EasyAdminBundle\Filter\DateTimeFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 class ReportCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
@@ -71,5 +74,15 @@ class ReportCrudController extends AbstractCrudController
                     return $this->isGranted('ROLE_VETERINAIRE') || $this->isGranted('ROLE_ADMIN');
                 });
             });
+    }
+
+    public function configureFilters(Filters $filters): Filters
+    {
+        return $filters
+            // Filtre par date
+            ->add(DateTimeFilter::new('created_at', 'Date de création'))
+    
+            // Filtre par animal
+            ->add(EntityFilter::new('animal', 'Animal'));
     }
 }
