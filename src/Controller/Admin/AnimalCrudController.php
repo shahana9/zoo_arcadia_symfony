@@ -13,7 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField; // Import de ChoiceField
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField; 
 
 class AnimalCrudController extends AbstractCrudController
 {
@@ -41,7 +41,7 @@ class AnimalCrudController extends AbstractCrudController
             TextareaField::new('nourriture'),
             TextField::new('grammage'),
             DateTimeField::new('Date_passage') 
-                ->setFormTypeOptions(['widget' => 'single_text']) //  un seul champ pour la date et l'heure//
+                ->setFormTypeOptions(['widget' => 'single_text']) 
                 ->setLabel('Date du passage'),
         ];
             
