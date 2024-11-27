@@ -64,7 +64,7 @@ class DashboardController extends AbstractDashboardController
         }
 
         // Visible uniquement pour les vétérinaires et Admin
-        if ($this->isGranted('ROLE_VETERINAIRE')) {
+        if ($this->isGranted('ROLE_VETERINAIRE') || $this->isGranted('ROLE_ADMIN')) {
             yield MenuItem::linkToCrud('Rapport médicaux', 'fas fa-notes-medical', Report::class);
         }
 
