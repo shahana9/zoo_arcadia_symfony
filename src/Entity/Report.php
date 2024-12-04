@@ -28,6 +28,7 @@ class Report
     #[ORM\Column(length: 255)]
     private ?string $race = null;
 
+    
     #[ORM\Column(length: 255)]
     private ?string $commentaires = null;
 
