@@ -5,7 +5,7 @@
 }
 
 header {
-  font-family: "raleway", sans-serif;
+  font-family: "Raleway", sans-serif !important;
   background-color: #0eb200;
 }
 
