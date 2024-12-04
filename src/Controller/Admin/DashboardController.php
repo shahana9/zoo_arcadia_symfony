@@ -4,10 +4,12 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Entity\Report;
+use App\Entity\Animal;
 use App\Entity\ServicePage;
 use App\Controller\Admin\UserCrudController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Controller\Admin\AnimalCrudController;
 use App\Controller\Admin\ServicePageCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -47,15 +49,18 @@ class DashboardController extends AbstractDashboardController
             return $this->redirect($url);
         }
 
+        if ($this->isGranted('ROLE_USER')) {
+            $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
+            $url = $adminUrlGenerator->setController(AnimalCrudController::class)->generateUrl();
+            return $this->redirect($url);
+        }
+
         throw $this->createAccessDeniedException();
     }
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
             ->setTitle('Zoo Arcadia - Administration')
-            ->setLocales([
-                'fr'
-            ])
             ->renderContentMaximized();
     }
 
@@ -67,7 +72,7 @@ class DashboardController extends AbstractDashboardController
         }
 
         // Visible uniquement pour les vétérinaires et Admin
-        if ($this->isGranted('ROLE_VETERINAIRE')) {
+        if ($this->isGranted('ROLE_VETERINAIRE') || $this->isGranted('ROLE_ADMIN')) {
             yield MenuItem::linkToCrud('Rapport médicaux', 'fas fa-notes-medical', Report::class);
         }
 
@@ -76,9 +81,9 @@ class DashboardController extends AbstractDashboardController
             yield MenuItem::linkToCrud('Page de Service', 'fas fa-file-alt', ServicePage::class);
             yield MenuItem::linkToRoute('Manage Avis', 'fa fa-comment', 'admin_avis_list');
         }
-
-        yield MenuItem::linkToLogout('Se déconnecter', 'fas fa-power-off');
-
         
+        //Visible pour tout le monde//
+        yield MenuItem::linkToCrud('Animaux', 'fa fa-list', Animal::class);
+        yield MenuItem::linkToLogout('Se déconnecter', 'fas fa-power-off');
     }
 }
