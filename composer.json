@@ -9,6 +9,7 @@
         "ext-iconv": "*",
         "ext-mongodb": "*",
         "amphp/http-client": "4.2.1",
+        "mongodb/mongodb": "^1.12",
         "doctrine/dbal": "^3",
         "doctrine/doctrine-bundle": "^2.12",
         "doctrine/doctrine-migrations-bundle": "^3.3",
