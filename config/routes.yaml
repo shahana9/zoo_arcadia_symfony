@@ -8,3 +8,10 @@ app_login:
 
 app_logout:
     path: /logout
+
+redirect_to_accueil:
+    path: /
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction
+    defaults:
+        route: app_accueil
+        permanent: true
