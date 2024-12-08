@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Controller\Admin\AnimalCrudController;
 use App\Controller\Admin\ServicePageCrudController;
+use App\Entity\Habitat;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
@@ -74,6 +75,7 @@ class DashboardController extends AbstractDashboardController
         // Visible uniquement pour les vétérinaires et Admin
         if ($this->isGranted('ROLE_VETERINAIRE') || $this->isGranted('ROLE_ADMIN')) {
             yield MenuItem::linkToCrud('Rapport médicaux', 'fas fa-notes-medical', Report::class);
+            yield MenuItem::linkToCrud('Habitat', 'fas fa-paw', Habitat::class);
         }
 
         // Visible uniquement pour les employés et les admins
